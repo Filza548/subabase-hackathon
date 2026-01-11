@@ -181,12 +181,105 @@
 
 
 
+// import supabase from "./config.js";
+
+// const title = document.getElementById("titleInput");
+// const description = document.getElementById("description");
+// const image = document.getElementById("imageInput");
+// const category = document.getElementById("category");
+// // const profileImgInput = document.getElementById("profileimg");/ // optional
+// const saveBtn = document.getElementById("saveBtn");
+
+// saveBtn.addEventListener("click", async () => {
+//     const { data: { user } } = await supabase.auth.getUser();
+//     if (!user) return alert("Please login first");
+
+//     // Use user's profile from metadata
+//     let proimgUrl = user.user_metadata?.profile_url;
+
+//     // Optional: update profile if user uploads a new one while posting
+//     // if (image.files[0]) {
+//     //     const newProfile = image.files[0];
+//     //     const fileName = `${Date.now()}-${newProfile.name}`;
+//     //     const { error: uploadError } = await supabase.storage
+//     //         .from("profileimg")
+//     //         .upload(fileName, newProfile);
+//     //     if (!uploadError) {
+//     //         const { data: publicData } = supabase.storage
+//     //             .from("profileimg")
+//     //             .getPublicUrl(fileName);
+//     //         proimgUrl = publicData.publicUrl;
+
+//     //         // Update user metadata
+//     //         await supabase.auth.updateUser({
+//     //             data: { profile_url: proimgUrl }
+//     //         });
+//     //     }
+//     // }
+
+//     // Upload post image
+//     const file = image.files[0];
+//     console.log(file);
+    
+//     if (!file) return alert("Please select a post image");
+
+//     const fileName = `${Date.now()}-${file.name}`;
+//     const { error: uploadError } = await supabase.storage
+//         .from("postimg")
+//         .upload(fileName, file);
+//     if (uploadError) return console.log(uploadError);
+
+//     const { data: publicData } = supabase.storage
+//         .from("postimg")
+//         .getPublicUrl(fileName);
+//     const imgUrl = publicData.publicUrl;
+
+//     // Insert post with owner info
+//     const { error: insertError } = await supabase.from("postapp").insert([{
+//         titlepost: title.value,
+//         postdes: description.value,
+//         postimgUrl: imgUrl,
+//         user_id: user.id,
+//         category: category.value,
+        
+//         profileimg: proimgUrl
+//     }]);
+
+//     if (insertError) return console.log(insertError);
+//     alert("Post added!");
+//     window.location.href = "showprod.html";
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import supabase from "./config.js";
 
 const title = document.getElementById("titleInput");
 const description = document.getElementById("description");
 const image = document.getElementById("imageInput");
-// const profileImgInput = document.getElementById("profileimg");/ // optional
+const category = document.getElementById("category");
+// const profileImgInput = document.getElementById("profileimg"); // optional
 const saveBtn = document.getElementById("saveBtn");
 
 saveBtn.addEventListener("click", async () => {
@@ -239,11 +332,13 @@ saveBtn.addEventListener("click", async () => {
         postdes: description.value,
         postimgUrl: imgUrl,
         user_id: user.id,
+    category: category.value,
+    profileimg: proimgUrl
         
-        profileimg: proimgUrl
+        
     }]);
 
     if (insertError) return console.log(insertError);
     alert("Post added!");
-    window.location.href = "showprod.html";
+    window.location.href = "index.html";
 });

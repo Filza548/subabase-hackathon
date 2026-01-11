@@ -1,108 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <title>Signup & Login</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard</title>
+
+  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+  />
 </head>
+<body class="bg-gray-100">
 
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <!-- Navbar -->
+  <!-- Navbar -->
+<nav class="sticky top-0 z-50 bg-white/70 backdrop-blur-lg border-b border-gray-200">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
 
-  <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-
-    <!-- Tabs -->
-    <div class="flex mb-6">
-      <button onclick="showLogin()" id="loginTab" class="w-1/2 py-2 font-bold border-b-2  border-blue-600">
-        Login
-      </button>
-      <button onclick="showSignup()" id="signupTab"
-        class="w-1/2 py-2 font-bold text-gray-500 border-b-2 border-transparent">
-        Signup
-      </button>
+    <!-- Left: Logo -->
+    <div class="flex items-center gap-2">
+      <div class="w-9 h-9 bg-indigo-600 text-white rounded-lg flex items-center justify-center font-bold">
+        P
+      </div>
+      <h1 class="text-xl font-bold text-gray-800 hidden sm:block">
+        PostApp
+      </h1>
     </div>
 
-    <!-- Login Form -->
-    <form id="loginForm">
-      <div class="mb-4">
-        <label class="block text-sm mb-1">Email</label>
-        <input type="email" id="inputEmail"
-          class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
+    <!-- Center: Search -->
+    <div class="hidden md:block flex-1 max-w-md">
+      <div class="relative">
+        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+        <input
+          type="text"
+          placeholder="Search posts..."
+          class="w-full pl-10 pr-4 py-2 rounded-full bg-gray-100
+                 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
       </div>
-
-      <div class="mb-4">
-        <label class="block text-sm mb-1">Password</label>
-        <input type="password" id="inputpass"
-          class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
-      </div>
-
-      <button id="loginBtn" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
-        Login
-      </button>
-    </form>
-
-    <!-- Signup Form -->
-    <form id="signupForm" class="hidden items-center">
-      <div class="mb-4">
-        <label class="block text-sm mb-1">Full Name</label>
-        <input id="userName" type="text"
-          class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
-      </div>
-
-      <div class="mb-4">
-        <label class="block text-sm mb-1">Email</label>
-        <input id="signEmail" type="email"
-          class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
-      </div>
-
-      <div class="mb-4">
-        <label class="block text-sm mb-1">Password</label>
-        <input id="signPass" type="password"
-          class="w-full border px-3 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
-      </div>
-      
-
-      <div class="mb-4 mt-4">
-      <label class="block text-sm mb-1 font-semibold">Upload Profile Image</label>
-      <input type="file" id="profileimg" accept="image/*"
-        class="w-full h-full  border p-2 rounded-full">
     </div>
 
-      <button id="signBtn" class="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition">
-        Create Account
-      </button>
-    </form>
+    <!-- Right: Actions -->
+    <div class="flex items-center gap-3">
 
+      <!-- Create Post -->
+      <a href="loginSignup.html"
+        class="hidden sm:flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-full
+               hover:bg-indigo-700 transition">
+        <i class="fa-solid fa-plus"></i>
+        <span>Create</span>
+    </a>
+
+      <!-- Profile -->
+      <div class="w-9 h-9 rounded-full bg-gray-300 overflow-hidden cursor-pointer " id="profimg">
+        <img
+          src=""
+          id="profileImg"
+          alt="profile"
+          class="w-full h-full object-cover"
+        />
+      </div>
+
+      <!-- Mobile Menu -->
+      <button class="md:hidden text-xl text-gray-700">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+    </div>
   </div>
+</nav>
 
-  
 
+
+
+
+<div id="showUser"
+  class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2  lg:grid-cols-4 gap-6 border-gray-500">
+</div>
+<!-- <div id="checkoutForm" ></div> -->
+
+
+
+<!-- Category Buttons -->
+<div class="max-w-7xl mx-auto px-4 mt-6">
+  <div id="categoryBar" class="flex flex-wrap gap-2"></div>
+</div>
+     
   <!-- JS -->
   <script>
-    function showLogin() {
-      loginForm.classList.remove("hidden");
-      signupForm.classList.add("hidden");
+    
+    // const menuBtn = document.getElementById("menuBtn");
+    // const mobileMenu = document.getElementById("mobileMenu");
 
-      loginTab.classList.add("border-blue-600", "text-black");
-      signupTab.classList.remove("border-blue-600", "text-black");
-      signupTab.classList.add("text-gray-500");
-    }
-
-    function showSignup() {
-      signupForm.classList.remove("hidden");
-      loginForm.classList.add("hidden");
-
-      signupTab.classList.add("border-green-600", "text-black");
-      loginTab.classList.remove("border-blue-600", "text-black");
-      loginTab.classList.add("text-gray-500");
-    }
+    // menuBtn.addEventListener("click", () => {
+    //   mobileMenu.classList.toggle("hidden");
+    // });
   </script>
 
+  <script type="module" src="showprod.js"></script>
   <script type="module" src="app.js"></script>
-  
+  <script type="module" src="config.js"></script>
+
 </body>
-
 </html>
-
-
-

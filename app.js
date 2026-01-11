@@ -65,7 +65,7 @@ signBtn?.addEventListener("click", async (e) => {
     }
 
     alert("Signup successful!");
-    window.location.href = "showprod.html";
+    window.location.href = "addpost.html";
 });
 
 // -------------------------- LOGIN --------------------------
@@ -95,7 +95,7 @@ loginBtn?.addEventListener("click", async (e) => {
     }
 
     alert("Login successful!");
-    window.location.href = "showprod.html";
+    window.location.href = "addpost.html";
 });
 
 // -------------------------- LOGOUT --------------------------

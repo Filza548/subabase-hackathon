@@ -274,5 +274,5 @@ document.getElementById("updateBtn").addEventListener("click", async () => {
   }
 
   alert("Product Updated Successfully");
-  window.location.href = "showprod.html";
+  window.location.href = "index.html";
 });
