@@ -74,146 +74,146 @@ fetchProductsAdmin();
 
 // import supabase from "./config.js";
 
-const showUser = document.getElementById("showUser");
-const categoryBar = document.getElementById("categoryBar");
+// const showUser = document.getElementById("showUser");
+// const categoryBar = document.getElementById("categoryBar");
 
-let allPosts = [];
-let activeCategory = "ALL";
+// let allPosts = [];
+// let activeCategory = "ALL";
 
-// 1) Fetch posts
-async function fetchPosts() {
-  const { data, error } = await supabase
-    .from("postapp")
-    .select("*")
-    .order("created_at", { ascending: false });
+// // 1) Fetch posts
+// async function fetchPosts() {
+//   const { data, error } = await supabase
+//     .from("postapp")
+//     .select("*")
+//     .order("created_at", { ascending: false });
 
-  if (error) {
-    console.log("fetchPosts error:", error);
-    return;
-  }
+//   if (error) {
+//     console.log("fetchPosts error:", error);
+//     return;
+//   }
 
-  allPosts = data || [];
-  renderCategoryButtons(allPosts);
-  renderPosts(allPosts);
-}
+//   allPosts = data || [];
+//   renderCategoryButtons(allPosts);
+//   renderPosts(allPosts);
+// }
 
-// 2) Make unique categories + render buttons (ALL + categories)
-function renderCategoryButtons(posts) {
-  if (!categoryBar) return;
+// // 2) Make unique categories + render buttons (ALL + categories)
+// function renderCategoryButtons(posts) {
+//   if (!categoryBar) return;
 
-  // categories clean + unique
-  const categories = Array.from(
-    new Set(
-      posts
-        .map(p => (p.category || "").trim())
-        .filter(c => c.length > 0)
-        .map(c => c.toLowerCase()) // normalize
-    )
-  );
+//   // categories clean + unique
+//   const categories = Array.from(
+//     new Set(
+//       posts
+//         .map(p => (p.category || "").trim())
+//         .filter(c => c.length > 0)
+//         .map(c => c.toLowerCase()) // normalize
+//     )
+//   );
 
-  // Show ALL + categories
-  categoryBar.innerHTML = "";
+//   // Show ALL + categories
+//   categoryBar.innerHTML = "";
 
-  // ALL button
-  categoryBar.appendChild(makeCategoryBtn("ALL"));
+//   // ALL button
+//   categoryBar.appendChild(makeCategoryBtn("ALL"));
 
-  // category buttons
-  categories.forEach(cat => {
-    // show with nice text (Title case)
-    const label = cat.charAt(0).toUpperCase() + cat.slice(1);
-    categoryBar.appendChild(makeCategoryBtn(label, cat));
-  });
+//   // category buttons
+//   categories.forEach(cat => {
+//     // show with nice text (Title case)
+//     const label = cat.charAt(0).toUpperCase() + cat.slice(1);
+//     categoryBar.appendChild(makeCategoryBtn(label, cat));
+//   });
 
-  highlightActiveButton();
-}
+//   highlightActiveButton();
+// }
 
-// 3) Create a button
-function makeCategoryBtn(label, value = "ALL") {
-  const btn = document.createElement("button");
-  btn.type = "button";
-  btn.dataset.value = value; // store real category value (normalized)
+// // 3) Create a button
+// function makeCategoryBtn(label, value = "ALL") {
+//   const btn = document.createElement("button");
+//   btn.type = "button";
+//   btn.dataset.value = value; // store real category value (normalized)
 
-  btn.className =
-    "px-4 py-2 rounded-full border bg-white text-gray-700 hover:bg-indigo-600 hover:text-white transition";
+//   btn.className =
+//     "px-4 py-2 rounded-full border bg-white text-gray-700 hover:bg-indigo-600 hover:text-white transition";
 
-  btn.textContent = label;
+//   btn.textContent = label;
 
-  btn.addEventListener("click", () => {
-    activeCategory = value;
+//   btn.addEventListener("click", () => {
+//     activeCategory = value;
 
-    highlightActiveButton();
+//     highlightActiveButton();
 
-    if (activeCategory === "ALL") {
-      renderPosts(allPosts);
-    } else {
-      const filtered = allPosts.filter(
-        p => (p.category || "").trim().toLowerCase() === activeCategory
-      );
-      renderPosts(filtered);
-    }
-  });
+//     if (activeCategory === "ALL") {
+//       renderPosts(allPosts);
+//     } else {
+//       const filtered = allPosts.filter(
+//         p => (p.category || "").trim().toLowerCase() === activeCategory
+//       );
+//       renderPosts(filtered);
+//     }
+//   });
 
-  return btn;
-}
+//   return btn;
+// }
 
-// 4) Highlight selected button
-function highlightActiveButton() {
-  if (!categoryBar) return;
+// // 4) Highlight selected button
+// function highlightActiveButton() {
+//   if (!categoryBar) return;
 
-  const buttons = categoryBar.querySelectorAll("button");
-  buttons.forEach(btn => {
-    const val = btn.dataset.value;
+//   const buttons = categoryBar.querySelectorAll("button");
+//   buttons.forEach(btn => {
+//     const val = btn.dataset.value;
 
-    if (val === activeCategory) {
-      btn.className =
-        "px-4 py-2 rounded-full border bg-indigo-600 text-white transition";
-    } else {
-      btn.className =
-        "px-4 py-2 rounded-full border bg-white text-gray-700 hover:bg-indigo-600 hover:text-white transition";
-    }
-  });
-}
+//     if (val === activeCategory) {
+//       btn.className =
+//         "px-4 py-2 rounded-full border bg-indigo-600 text-white transition";
+//     } else {
+//       btn.className =
+//         "px-4 py-2 rounded-full border bg-white text-gray-700 hover:bg-indigo-600 hover:text-white transition";
+//     }
+//   });
+// }
 
-// 5) Render posts cards
-function renderPosts(posts) {
-  if (!showUser) return;
+// // 5) Render posts cards
+// function renderPosts(posts) {
+//   if (!showUser) return;
 
-  if (!posts || posts.length === 0) {
-    showUser.innerHTML = `<p class="text-gray-500">No posts found.</p>`;
-    return;
-  }
+//   if (!posts || posts.length === 0) {
+//     showUser.innerHTML = `<p class="text-gray-500">No posts found.</p>`;
+//     return;
+//   }
 
-  showUser.innerHTML = posts
-    .map(post => {
-      const title = post.titlepost || "";
-      const desc = post.postdes || "";
-      const cat = post.category || "";
+//   showUser.innerHTML = posts
+//     .map(post => {
+//       const title = post.titlepost || "";
+//       const desc = post.postdes || "";
+//       const cat = post.category || "";
 
-      // IMPORTANT: change postingUrl to postimgUrl if your DB column is postimgUrl
-      const img = post.postingUrl || ""; 
+//       // IMPORTANT: change postingUrl to postimgUrl if your DB column is postimgUrl
+//       const img = post.postingUrl || ""; 
 
-      const profile = post.profileimg || "https://i.pravatar.cc/60";
-      return `
-        <div class="bg-white rounded-xl shadow p-4">
-          <div class="flex items-center gap-3 mb-3">
-            <img src="${profile}" class="w-10 h-10 rounded-full object-cover" />
-            <div>
-              <p class="text-sm font-semibold text-gray-800">${title}</p>
-              <p class="text-xs text-gray-500">${cat}</p>
-            </div>
-          </div>
+//       const profile = post.profileimg || "https://i.pravatar.cc/60";
+//       return `
+//         <div class="bg-white rounded-xl shadow p-4">
+//           <div class="flex items-center gap-3 mb-3">
+//             <img src="${profile}" class="w-10 h-10 rounded-full object-cover" />
+//             <div>
+//               <p class="text-sm font-semibold text-gray-800">${title}</p>
+//               <p class="text-xs text-gray-500">${cat}</p>
+//             </div>
+//           </div>
 
-          ${img ? `<img src="${img}" class="w-full h-40 object-cover rounded-lg mb-3" />` : ""}
+//           ${img ? `<img src="${img}" class="w-full h-40 object-cover rounded-lg mb-3" />` : ""}
 
-          <p class="text-sm text-gray-700">${desc}</p>
-        </div>
-      `;
-    })
-    .join("");
-}
+//           <p class="text-sm text-gray-700">${desc}</p>
+//         </div>
+//       `;
+//     })
+//     .join("");
+// }
 
-// Start
-fetchPosts();
+// // Start
+// fetchPosts();
 
 // import supabase from "./config.js";
 
