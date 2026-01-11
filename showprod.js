@@ -215,3 +215,151 @@ function renderPosts(posts) {
 // Start
 fetchPosts();
 
+// import supabase from "./config.js";
+
+// // Get logged-in user
+// // const { data: { user } } = await supabase.auth.getUser();
+// // if (!user) {
+// //   alert("Please login first");
+// //   window.location.href = "./index.html";
+// // }
+
+// // Navbar profile
+// let profileImg = document.getElementById("profileImg");
+
+// // Fetch posts
+// const prodcard = document.getElementById("showUser");
+
+// // ✅ Category bar element (index.html me add kiya hoga)
+// const categoryBar = document.getElementById("categoryBar");
+
+// // ✅ store all products for filtering
+// let allProducts = [];
+// let activeCategory = "ALL";
+
+// function attachViewDetailHandlers() {
+//   document.querySelectorAll(".viewdetailBtn").forEach(btn => {
+//     btn.addEventListener("click", () => {
+//       const id = btn.dataset.id;
+//       window.location.href = `onlyUserPro.html?id=${id}`;
+//     });
+//   });
+// }
+
+// // ✅ Render products EXACT same UI as yours
+// function renderProducts(data) {
+//   prodcard.innerHTML = data.map(product => {
+//     return `
+//       <div class="bg-white rounded-2xl shadow-md hover:shadow-xl transition p-4 mt-5">
+        
+//         <!-- Post Image -->
+//         <div class="w-40 h-48 rounded-xl overflow-hidden bg-gray-100 mb-3">
+//           <img src="${product.postimgUrl}" class="w-[200px] h-[200px] object-cover">
+//         </div>
+
+//         <!-- Post Content -->
+//         <h3 class="font-bold text-lg text-gray-800 mb-1">${product.titlepost}</h3>
+//         <p class="text-sm text-gray-600 line-clamp-2">${product.postdes}</p>
+//         <img src="${product.profileimg}" class="w-10 h-10 rounded-full object-cover">
+
+//         <!-- Actions -->
+//         <div class="flex justify-between items-center mt-4">
+//           <div class="flex gap-4 text-gray-600 text-sm">
+//             <button class="hover:text-red-500 transition">
+//               <i class="fa-regular fa-heart"></i> Like
+//             </button>
+//             <button class="hover:text-indigo-500 transition">
+//               <i class="fa-regular fa-comment"></i> Comment
+//             </button>
+//           </div>
+//           <button class="viewdetailBtn text-xs bg-red-500 text-white px-3 py-1 rounded-lg" data-id="${product.id}">
+//             View Detail
+//           </button>
+//         </div>
+//       </div>
+//     `;
+//   }).join("");
+
+//   // ✅ your existing functionality remains
+//   attachViewDetailHandlers();
+// }
+
+// // ✅ Build category buttons (ALL + unique categories)
+// function renderCategoryButtons(products) {
+//   if (!categoryBar) return;
+
+//   // unique categories
+//   const categories = Array.from(new Set(
+//     products
+//       .map(p => (p.category || "").trim())
+//       .filter(c => c.length > 0)
+//   ));
+
+//   categoryBar.innerHTML = "";
+
+//   // ALL button
+//   categoryBar.appendChild(makeCategoryBtn("ALL", "ALL"));
+
+//   // category buttons
+//   categories.forEach(cat => {
+//     categoryBar.appendChild(makeCategoryBtn(cat, cat));
+//   });
+
+//   highlightActiveCategory();
+// }
+
+// function makeCategoryBtn(label, value) {
+//   const btn = document.createElement("button");
+//   btn.type = "button";
+//   btn.dataset.value = value;
+
+//   btn.className = "px-4 py-2 rounded-full border bg-white text-gray-700 hover:bg-indigo-600 hover:text-white transition";
+//   btn.textContent = label;
+
+//   btn.addEventListener("click", () => {
+//     activeCategory = value;
+//     highlightActiveCategory();
+
+//     if (activeCategory === "ALL") {
+//       renderProducts(allProducts);
+//     } else {
+//       const filtered = allProducts.filter(p =>
+//         (p.category || "").trim() === activeCategory
+//       );
+//       renderProducts(filtered);
+//     }
+//   });
+
+//   return btn;
+// }
+
+// function highlightActiveCategory() {
+//   if (!categoryBar) return;
+//   categoryBar.querySelectorAll("button").forEach(btn => {
+//     if (btn.dataset.value === activeCategory) {
+//       btn.className = "px-4 py-2 rounded-full border bg-indigo-600 text-white transition";
+//     } else {
+//       btn.className = "px-4 py-2 rounded-full border bg-white text-gray-700 hover:bg-indigo-600 hover:text-white transition";
+//     }
+//   });
+// }
+
+// async function fetchProductsAdmin() {
+//   const { data, error } = await supabase.from("postapp").select("*");
+//   if (error) return console.log(error);
+
+//   // profile image set (same as yours)
+//   const { data: { user } } = await supabase.auth.getUser();
+//   profileImg.src = user.user_metadata.profile_url;
+
+//   // ✅ store products
+//   allProducts = data;
+
+//   // ✅ categories create
+//   renderCategoryButtons(allProducts);
+
+//   // ✅ initial render all
+//   renderProducts(allProducts);
+// }
+
+// fetchProductsAdmin();
