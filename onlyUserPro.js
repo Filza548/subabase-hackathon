@@ -1,11 +1,11 @@
 import supabase from "./config.js";
 
 // ================= AUTH CHECK =================
-const { data: { user } } = await supabase.auth.getUser();
-if (!user) {
-    // alert("Please login first");
-    window.location.href = "./index.html";
-}
+// const { data: { user } } = await supabase.auth.getUser();
+// if (!user) {
+//     // alert("Please login first");
+//     window.location.href = "./index.html";
+// }
 
 // ================= GET PRODUCT ID FROM URL =================
 const params = new URLSearchParams(window.location.search);
