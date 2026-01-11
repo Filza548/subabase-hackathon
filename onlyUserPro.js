@@ -3,7 +3,7 @@ import supabase from "./config.js";
 // ================= AUTH CHECK =================
 const { data: { user } } = await supabase.auth.getUser();
 if (!user) {
-    alert("Please login first");
+    // alert("Please login first");
     window.location.href = "./index.html";
 }
 
