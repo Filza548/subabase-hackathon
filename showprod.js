@@ -218,11 +218,11 @@
 import supabase from "./config.js";
 
 // Get logged-in user
-const { data: { user } } = await supabase.auth.getUser();
-if (!user) {
-  alert("Please login first");
-  window.location.href = "./index.html";
-}
+// const { data: { user } } = await supabase.auth.getUser();
+// if (!user) {
+//   alert("Please login first");
+//   window.location.href = "./index.html";
+// }
 
 // Navbar profile
 let profileImg = document.getElementById("profileImg");
