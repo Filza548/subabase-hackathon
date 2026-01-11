@@ -284,7 +284,7 @@ const saveBtn = document.getElementById("saveBtn");
 
 saveBtn.addEventListener("click", async () => {
     const { data: { user } } = await supabase.auth.getUser();
-    if (!user) return alert("Please login first");
+    // if (!user) return alert("Please login first");
 
     // Use user's profile from metadata
     let proimgUrl = user.user_metadata?.profile_url;
